@@ -1,0 +1,12 @@
+{
+  "name": "ci-cd-workshop-slide",
+  "private": true,
+  "scripts": {
+    "dev": "marp --server .",
+    "build": "marp slides.md -o dist/index.html && mkdir -p dist/teaching-material && cp -r teaching-material/images dist/teaching-material/",
+    "build:pdf": "marp slides.md --pdf -o dist/slides.pdf"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.5.1"
+  }
+}
