@@ -1105,3 +1105,45 @@ section:has(> nav.chapter-drawer) > footer { left: 288px; }
 @media (prefers-reduced-motion: reduce) {
   .pyramid .layer, .pyramid .desc, .pyramid-note { transition: none !important; }
 }
+
+.issues.lint .label { color: var(--blue); }
+.lint-code {
+  align-self: stretch;
+  padding: 22px 26px;
+  border-radius: 14px;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  font-family: var(--font-code);
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--code-ink);
+  white-space: pre;
+}
+.lint-code .kw { color: var(--syntax-keyword); }
+.lint-code .str { color: var(--syntax-string); }
+.lint-code .fn { color: var(--syntax-function); }
+.lint-code u {
+  text-decoration: underline wavy #ff6b61;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.lint-msg {
+  margin-top: 20px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--red);
+  background: var(--error-bg);
+  color: var(--red);
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.lint-msg.warn { border-color: var(--amber); background: var(--warning-bg); color: var(--amber); }
+.lint-code:has(+ .lint-msg.warn) u { text-decoration-color: #f0b54a; }
+
+@media screen {
+  .scene > .lint-code { animation: tl-text .45s ease-out both; animation-delay: var(--d); }
+  .lint-code u { animation: squiggle .5s ease both; animation-delay: calc(var(--d) + .45s); }
+  .scene > .lint-msg { animation: issue-mark .4s cubic-bezier(.3, 1.5, .5, 1) both; animation-delay: calc(var(--d) + .85s); }
+}
+@keyframes squiggle { from { text-decoration-color: transparent; } }

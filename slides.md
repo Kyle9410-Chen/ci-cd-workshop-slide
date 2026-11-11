@@ -239,14 +239,41 @@ QA 發現 bug 就要回到本機開發，再走一次上面的流程；沒有問
 
 <p>不執行程式，透過分析程式碼的寫法找出潛在問題</p>
 
-<div class="cards" style="margin-top:16px">
-  <div class="card"><span class="label">01</span><h3>Style</h3><p>排版與命名是否符合規範</p></div>
-  <div class="card"><span class="label">02</span><h3>潛在 bug</h3><p>未使用的變數、未定義的名稱</p></div>
-  <div class="card"><span class="label">03</span><h3>不好的寫法</h3><p>容易出錯或難以維護的寫法</p></div>
+<div class="issues lint">
+  <div class="issue" style="--k:0">
+    <div class="scene">
+      <div class="lint-code"><span class="kw">let</span> <u>user_name</u> = <span class="str">'Kyle'</span></div>
+      <span class="lint-msg warn">⚠ 變數命名應使用 camelCase</span>
+    </div>
+    <span class="label">01</span>
+    <h3>Style</h3>
+    <p>排版與命名是否符合規範</p>
+  </div>
+  <div class="issue" style="--k:1">
+    <div class="scene">
+      <div class="lint-code"><span class="kw">import</span> <u>os</u><br><span class="fn">print</span>(<u>totl</u>)</div>
+      <span class="lint-msg">✗ os 未使用 · totl 未定義</span>
+    </div>
+    <span class="label">02</span>
+    <h3>潛在 bug</h3>
+    <p>未使用的變數、未定義的名稱</p>
+  </div>
+  <div class="issue" style="--k:2">
+    <div class="scene">
+      <div class="lint-code"><span class="kw">if</span> (count <u>==</u> <span class="str">'0'</span>) {<br>  reset()<br>}</div>
+      <span class="lint-msg warn">⚠ 應使用 === 避免型別轉換</span>
+    </div>
+    <span class="label">03</span>
+    <h3>不好的寫法</h3>
+    <p>容易出錯或難以維護的寫法</p>
+  </div>
 </div>
 
 <!--
-Lint 是一種靜態檢查工具，各種語言都有自己的 Linter，透過分析程式碼的撰寫方式找出潛在問題，通常包括 Style、潛在 bug、不好的寫法。
+Lint 是一種靜態檢查工具，各種語言都有自己的 Linter，透過分析程式碼的撰寫方式找出潛在問題，通常包括 Style、潛在 bug、不好的寫法。三個例子依序出現：
+Style：user_name 不符合 JavaScript 的 camelCase 命名規範。
+潛在 bug：import 了 os 卻沒用到，print 的 totl 是打錯字、根本沒有定義，不執行程式也能發現。
+不好的寫法：== 會先做型別轉換，'0' == 0 會成立，容易出錯，Linter 建議改用 ===。
 -->
 
 ---
