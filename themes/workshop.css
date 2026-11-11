@@ -1147,3 +1147,20 @@ section:has(> nav.chapter-drawer) > footer { left: 288px; }
   .scene > .lint-msg { animation: issue-mark .4s cubic-bezier(.3, 1.5, .5, 1) both; animation-delay: calc(var(--d) + .85s); }
 }
 @keyframes squiggle { from { text-decoration-color: transparent; } }
+
+.tl-row.compact { grid-template-columns: 200px 1fr; }
+.tl-row.compact + .tl-row.compact { margin-top: 48px; }
+.tl-row.compact .tl > li > b { font-size: 34px; }
+
+.issues > ul { display: contents; }
+.issues > ul > li { display: contents; }
+.issues > ul > li .issue { --d: .15s; height: 100%; box-sizing: border-box; padding: 8px 40px; border-left: 0; }
+.issues > ul > li:first-child .issue { padding-left: 0; }
+.issues > ul > li:last-child .issue { padding-right: 0; }
+.issues > ul > li + li .issue { border-left: 1px solid #e8e8ed; }
+
+@media screen {
+  .issues > ul > li .issue > :not(.scene) { animation: tl-text .45s ease-out both; animation-delay: calc(var(--d) + .2s); }
+  .issues > ul > li[data-bespoke-marp-fragment="inactive"] .issue *,
+  .issues > ul > li[data-bespoke-marp-fragment="inactive"] .issue { animation-name: none; }
+}

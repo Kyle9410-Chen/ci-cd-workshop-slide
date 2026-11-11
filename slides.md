@@ -390,52 +390,39 @@ push 到遠端後，CI 會在統一的環境中重新執行所有測試。
 
 ## Continuous Delivery 與 Continuous Deployment
 
-<div class="tl-row" style="margin-top:56px">
+<div class="tl-row compact" style="margin-top:40px">
   <span class="tl-cap">兩者相同</span>
-  <ol class="tl more">
+  <ol class="tl">
     <li><b>建置</b></li>
     <li><b>部署到測試環境</b></li>
     <li><b>驗證</b></li>
   </ol>
 </div>
-
-<!--
-CD 把建置、部署到各環境與驗證的整個過程自動化，讓程式碼隨時處於可以部署的狀態。
-前面三步 Delivery 與 Deployment 完全相同。
--->
-
----
-
-## Continuous Delivery 與 Continuous Deployment
-
-<div class="tl-row" style="margin-top:56px">
-  <span class="tl-cap">Continuous Delivery</span>
-  <ol class="tl">
+<div class="tl-row compact">
+  <span class="tl-cap">Delivery</span>
+  <ol class="tl" style="--base:1.4s">
     <li><b>驗證</b></li>
     <li class="warn"><b>人工決定上線</b></li>
     <li><b>正式環境</b></li>
   </ol>
 </div>
-
-<!--
-Continuous Delivery 在驗證之後保留人工決定上線的時機。
--->
-
----
-
-## Continuous Delivery 與 Continuous Deployment
-
-<div class="tl-row" style="margin-top:56px">
-  <span class="tl-cap">Continuous Deployment</span>
-  <ol class="tl">
+<div class="tl-row compact">
+  <span class="tl-cap">Deployment</span>
+  <ol class="tl" style="--base:2.6s">
     <li><b>驗證</b></li>
     <li class="good"><b>直接自動上線</b></li>
     <li><b>正式環境</b></li>
   </ol>
 </div>
 
+<p class="muted" style="margin-top:48px">差別只在「部署到正式環境」這一步是否也自動化</p>
+
 <!--
-Continuous Deployment 通過所有檢查後直接自動上線。兩者的差異只在「部署到正式環境」這一步是否也自動化。
+CD 把建置、部署到各環境與驗證的整個過程自動化，讓程式碼隨時處於可以部署的狀態。
+第一列：建置、部署到測試環境、驗證，Delivery 與 Deployment 完全相同。
+第二列：Continuous Delivery 在驗證之後保留人工決定上線的時機。
+第三列：Continuous Deployment 通過所有檢查後直接自動上線。
+兩者的差異只在「部署到正式環境」這一步是否也自動化。
 -->
 
 ---
@@ -542,7 +529,8 @@ server {
 ## 如果讓使用者直接連線到各個服務
 
 <div class="issues">
-  <div class="issue" style="--k:0">
+
+* <div class="issue">
     <div class="scene">
       <div class="bx">瀏覽器<small>example.com</small></div>
       <div class="vl bad"></div>
@@ -553,7 +541,7 @@ server {
     <h3>不同來源</h3>
     <p>前端在 <code>example.com</code>、後端在 <code>api.example.com</code> 或不同 port，需要額外設定 CORS</p>
   </div>
-  <div class="issue" style="--k:1">
+* <div class="issue">
     <div class="scene">
       <div class="bx">網際網路</div>
       <div class="pair">
@@ -566,7 +554,7 @@ server {
     <h3>對外暴露多個入口</h3>
     <p>每個服務都要開放對外連線，管理與安全性都較麻煩</p>
   </div>
-  <div class="issue" style="--k:2">
+* <div class="issue">
     <div class="scene">
       <div class="bx">Frontend<small>API = <s>10.0.0.5</s></small></div>
       <div class="vl bad"></div>
@@ -577,10 +565,11 @@ server {
     <h3>前端要知道後端位址</h3>
     <p>後端位址一變動，前端就得重新建置</p>
   </div>
+
 </div>
 
 <!--
-今天的專案有 Frontend 與 Backend 兩個服務，如果讓使用者分別直接連線，就會遇到這三個問題，三張圖依序播放：
+今天的專案有 Frontend 與 Backend 兩個服務，如果讓使用者分別直接連線，就會遇到這三個問題，每按一次顯示一個：
 CORS：網頁在 example.com，卻要呼叫 api.example.com，瀏覽器視為不同來源，沒有設定 CORS 就會擋下。
 入口：Frontend 與 Backend 都要對外開 port，入口變多，管理與安全性都較麻煩。
 位址：前端在建置時就寫入後端位址，後端位址一變，前端就得重新建置。
